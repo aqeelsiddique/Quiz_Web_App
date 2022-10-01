@@ -1,0 +1,26 @@
+<h1>{{title}}: {{rules.name}}</h1>
+<p>{{rules.description}}</p>
+<p>{{rules.lifespan}}</p>
+
+{{#if rules_processs.length}}
+  <p><strong>Delete the following processs before attempting to delete this rules.</strong></p>
+  <div style="margin-left: 20px; margin-top: 20px">
+    <h4>Processes</h4>
+    <dl>
+      {{#each rules_processs}}
+      <dt>
+        <a href={{this.url}}>{{this.name}}</a>
+        <dd>{{this.summary}}</dd>
+      </dt>
+      {{/each}}
+    </dl>
+{{else}}
+  <p>Do you really want to delete this rules?</p>
+  <form method="POST" action="">
+    <div class="form-group">
+      <input id="rulesid" class="form-control" type="hidden" name="rulesid" required="true" value={{rules._id}}>
+    </div>
+    <button class="btn btn-danger" type="submit">Delete</button>
+  </form>
+  </div>
+{{/if}}

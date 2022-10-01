@@ -1,0 +1,25 @@
+<h1>Category: {{category.name}} </h1>
+
+<div style="margin-left:20px;margin-top:20px">
+  <h4>Question</h4>
+  <dl>
+    {{#each category_processes}}
+    <dt>
+      <a href={{this.url}}>{{this.name}}</a>
+      <dd>
+        {{this.summary}}
+      </dd>
+    </dt>
+    {{else}}
+      <p>This category has no Questions.</p>
+    {{/each}}
+  </dl>
+</div>
+
+<hr>
+{{!-- <p><a href="{{category.url}}/delete">Delete category</a></p>
+<p><a href="{{category.url}}/update">Update category</a></p> --}}
+<div class="btn">
+<button class="btn btn-primary "><a class="text-white" href="{{category.url}}/delete">Delete machine</a></button class="btn btn-primary">
+<button class="btn btn-danger " ><a class="text-white" href="{{category.url}}/update">Update machine</a></button>
+</div>

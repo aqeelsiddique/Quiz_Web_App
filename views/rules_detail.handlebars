@@ -1,0 +1,26 @@
+<h1>Machine: {{rules.name}}</h1>
+<h1>Des: {{rules.des}}</h1>
+<h1>Des: {{rules.prize}}</h1>
+
+{{!-- <p>{{rules.lifespan}}</p> --}}
+
+<div style="margin-left: 20px; margin-top: 20px">
+  <h4>Rules </h4>
+  <dl>
+    {{#each rules_processes}}
+    <dt>
+      <a href={{this.url}}>{{this.name}}</a>
+      <p>{{this.Prize}}</p>
+      <p>{{this.des}}</p>
+      
+    </dt>
+    {{else}}
+      <p>This rules has no processs.</p>
+    {{/each}}
+  </dl>
+</div>
+<hr>
+<div class="btn">
+<button class="btn btn-primary "><a class="text-white" href="{{rules.url}}/delete">Delete rules</a></button class="btn btn-primary">
+<button class="btn btn-danger " ><a class="text-white" href="{{rules.url}}/update">Update rules</a></button>
+</div>

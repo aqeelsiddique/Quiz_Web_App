@@ -1,0 +1,32 @@
+{{!-- <h1>Machine: {{machine.name}}</h1> --}}
+{{!-- <h1>Des: {{machine.description}}</h1> --}}
+{{!-- <p>{{machine.lifespan}}</p> --}}
+
+
+<h1>Quiz: {{machine.name}}</h1>
+
+<div style="margin-left: 20px; margin-top: 20px">
+  <h4>Questions </h4>
+  <dl>
+    {{#each machine_processes}}
+    <dt>
+      <a href={{this.url}}>{{this.name}}</a>
+      <p>{{this.description}}</p>
+      <ol>
+        <li>{{this.question}}</li>
+        <ul>
+          <li>{{this.option1}}</li>
+          <li>{{this.option2}}</li>
+        </ul>
+      </ol>
+    </dt>
+    {{else}}
+      <p>This Quiz has no Questions.</p>
+    {{/each}}
+  </dl>
+</div>
+<hr>
+<div class="btn">
+<button class="btn btn-primary "><a class="text-white" href="{{machine.url}}/delete">Delete Quiz</a></button class="btn btn-primary">
+<button class="btn btn-danger " ><a class="text-white" href="{{machine.url}}/update">Update Quiz</a></button>
+</div>

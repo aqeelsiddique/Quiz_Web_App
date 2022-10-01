@@ -1,0 +1,21 @@
+
+<div class="rules_list">
+<h1 class="rules_list_title">{{title}}</h1>
+
+{{!-- <ul>
+    <li><a href="{{this.name}}">{{this.name}}</a><br>
+    <p>{{this.des}}</p>
+    </li>
+</ul> --}}
+<ul>
+  {{#each rules_list}}
+<li><a href={{this.url}}>{{this.name}}</a> 
+<p>{{this.prize}}</p>
+ <p>{{this.des}}</p> 
+ </li>
+  {{else}}
+    <li>There are no Rules.</li>
+  {{/each}}
+</ul>
+
+</div>

@@ -1,0 +1,9 @@
+{{!-- <h1>{{title}}</h1> --}}
+<h1>Quizes List</h1>
+<ul>
+  {{#each machine_list}}
+<li><a href={{this.url}}>{{this.name}}</a> - {{this.question}} {{this.option1}} {{this.option2}}</li>
+  {{else}}
+    <li>There are no quiz.</li>
+  {{/each}}
+</ul>
