@@ -37,6 +37,7 @@ const hbs = exphbs.create({
       }
     },
   },
+  
   runtimeOptions: {
     allowProtoMethodsByDefault: true,
     allowProtoPropertiesByDefault: true,

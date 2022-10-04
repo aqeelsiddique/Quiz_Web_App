@@ -8,6 +8,8 @@ const category_controller = require('../controllers/categoryController');
 const process_instance_controller = require('../controllers/processinstanceController');
 const rules_controller = require('../controllers/rulesController');
 const search_controller = require('../controllers/searchController');
+const  subject_controller = require('../controllers/SubjectController');
+const QustionController = require('../controllers/Questions')
 // const role_detail = require('../views/organization/role_detail')
 
 /// Routes ///
@@ -41,11 +43,19 @@ router.get('/processes', process_controller.process_list);
 
 /// Machine Routes ///
 
+
 // GET request for creating a Machine. NOTE This must come before route for id (i.e. display machine).
 router.get('/machine/create', machine_controller.machine_create_get);
 
 // POST request for creating a Machine.
 router.post('/machine/create', machine_controller.machine_create_post);
+
+////////update a  code post a different subject by @ Aqeel
+
+
+
+
+//////////////////////////////A
 
 // GET request to delete a Machine.
 router.get('/machine/:id/delete', machine_controller.machine_delete_get);
@@ -79,6 +89,8 @@ router.post('/rules/:id/delete', rules_controller.rules_delete_post);
 
 router.get('/rules/:id/update',rules_controller.rules_update_get);
 router.post('/rules/:id/update',rules_controller.rules_update_post);
+
+
 
 
 
@@ -164,7 +176,35 @@ router.get(
 
 /// Search Route ///
 
+
+///// this is update post method by @Aqeel
+//////////////////////Route a update code aqeel of create a catory
+router.post('/category/Add' , category_controller.create_catory)
+
+/////////subject part
+router.post('/subject/Add' ,  subject_controller.create_subject)
+router.delete('/delteSubject/:id' , subject_controller.deleteSubject)
+router.put('/UpdateSubject/:id' , subject_controller.updateSubject)
+///////////
+
+router.get('/Allcategorie', category_controller.category_list);
+router.delete('/delteCatory/:id', category_controller.deleteCategory)
+router.put('/updateCat/:id', category_controller.updateCategory)
+router.get('/AllSubjects' , subject_controller.Subject_list)
+
+////////////////////////////////////////Questions post Different Category
+
+router.post('/Question/Add' , QustionController.CreateQuestion )
+router.get('/SimpleQuestions' , QustionController.getSimpleQuestions )
+router.delete('/DeleteQuestion/:id', QustionController.deleteQuestion)
+
+router.post('/MediumQuestion/Add' , QustionController.CreatemediumQuestions)
+router.post('/HardQuestion/Add' , QustionController.CreateHardQuestions)
 // GET request for list of search results.
 router.get('/search', search_controller.search_query);
 
 module.exports = router;
+
+
+
+

@@ -21,6 +21,7 @@ exports.machine_list = (req, res, next) => {
     });
 };
 
+
 // Display detail page for a specific Machine.
 exports.machine_detail = (req, res, next) => {
   async.parallel(
@@ -51,7 +52,6 @@ exports.machine_detail = (req, res, next) => {
     }
   );
 };
-
 // Display Machine create form on GET.
 exports.machine_create_get = (req, res, next) => {
   res.render('machine_form', { title: 'Create Machine' });

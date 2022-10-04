@@ -13,12 +13,17 @@
       {{/each}}
     </dl>
 {{else}}
+
+
   <p>Do you really want to delete this Category?</p>
+  
   <form method="POST" action="">
     <div class="form-group">
       <input id="id" class="form-control" type="hidden" name="id" required="true" value={{category._id}}>
     </div>
-    <button class="btn btn-danger" type="submit">Delete</button>
+    <button class="btn btn-danger" type="submit">Delete quiz</button>
   </form>
   </div>
+
+
 {{/if}}

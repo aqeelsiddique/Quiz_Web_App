@@ -2,7 +2,7 @@ const app = require('./app');
 const mongoose = require('mongoose');
 
 // DB Connection
-const db = process.env.MONGODB_URI || 'mongodb+srv://visio:spark@cluster0.n3i8upv.mongodb.net/visio?retryWrites=true&w=majority';
+const db = process.env.MONGODB_URI || 'mongodb+srv://quiz:quiz@cluster0.n1pwvkp.mongodb.net/quizapp?retryWrites=true&w=majority';
 
 // Connect to MongoDB instance
 mongoose
