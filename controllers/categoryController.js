@@ -7,6 +7,7 @@ const async = require('async');
 const catchasynerror = require('./midlleware/catchasynerror');
 const updatecatogry = require('../models/updatecatogry');
 const ErrorHandler = require('./utills/errorHandler');
+const category = require('../models/category');
 
 
 //////////////////////////////post method
@@ -29,6 +30,26 @@ res.status(201).json({
     success:true,
     Category
 });
+
+};
+/////////////////////get method of category 
+exports.category_list = function (req, res, next) {
+  category.find()
+    .sort([['name', 'ascending']])
+    .exec(function (err, list_categories) {
+      if (err) {
+        return next(err);
+      }
+      // Successful, so render.
+      res.status(201).json({
+        success:true,
+        list_categories       
+    });
+    res.render('category_list', {
+        title: 'Category List',
+        list_categories: list_categories,
+      });
+    });
 };
 
 
@@ -38,7 +59,7 @@ res.status(201).json({
   ////--- admin  @AQeel$Umer
 
   exports.deleteCategory = catchasynerror( async (req, res, next) => {
-    let dcategory = await updatecatogry.findById(req.params.id);
+    let dcategory = await category.findById(req.params.id);
   
     if(!dcategory){
         return next("Question not found",404);
@@ -53,24 +74,24 @@ res.status(201).json({
     })
   })
 
-//update a Category----only admin update the category
-exports.updateCategory = catchasynerror(async (req, res, next) => {
-  let UpdateCat = await updatecatogry.findById(req.params.id);
+//update a Category   ----only admin update the category
+exports.ucategory = catchasynerror(async (req, res, next) => {
+  let UdateCat = await category.findById(req.params.id);
 
-  if(!UpdateCat){
+  if(!UdateCat){
       return next(new ErrorHandler("Subject not found",404));
   }
-  UpdateCat = await updatecatogry.findByIdAndUpdate(req.params.id, req.body , {
+  UdateCat = await category.findByIdAndUpdate(req.params.id, req.body , {
       new:true,
       runValidators:true,
       useFindAndModify:false
   });
   res.status(200).json({
       success:true,
-      UpdateCat
+      UdateCat
   })
 });
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////POST METHOD
 // Handle Category create on POST.
 
@@ -128,36 +149,8 @@ exports.category_create_post = [
   },
 ];
 
-
-exports.category_list = function (req, res, next) {
-  updatecatogry.find()
-    .sort([['name', 'ascending']])
-    .exec(function (err, list_categories) {
-      if (err) {
-        return next(err);
-      }
-      // Successful, so render.
-      res.status(201).json({
-        success:true,
-        list_categories
-        
-        
-    });
-
-      res.render('category_list', {
-        title: 'Category List',
-        list_categories: list_categories,
-      });
-    });
-};
-
-
-
 ///////////////////////////////////////////////////////////////////in below oild code and above new code @Aqeel
-
 // Display list of all Category.
-
-
 // Display detail page for a specific Category.
 exports.category_detail = function (req, res, next) {
   async.parallel(
@@ -196,11 +189,8 @@ exports.category_create_get = function (req, res, next) {
 };
 
 
-
-
-
-
 // Display Category delete form on GET.
+
 exports.category_delete_get = function (req, res, next) {
   async.parallel(
     {

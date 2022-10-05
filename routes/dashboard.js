@@ -184,12 +184,13 @@ router.post('/category/Add' , category_controller.create_catory)
 /////////subject part
 router.post('/subject/Add' ,  subject_controller.create_subject)
 router.delete('/delteSubject/:id' , subject_controller.deleteSubject)
-router.put('/UpdateSubject/:id' , subject_controller.updateSubject)
+router.post('/updateSubject/:id' , subject_controller.updateSubject)
+
 ///////////
 
 router.get('/Allcategorie', category_controller.category_list);
 router.delete('/delteCatory/:id', category_controller.deleteCategory)
-router.put('/updateCat/:id', category_controller.updateCategory)
+router.put('/updateCat/:id', category_controller.ucategory)
 router.get('/AllSubjects' , subject_controller.Subject_list)
 
 ////////////////////////////////////////Questions post Different Category

@@ -66,27 +66,67 @@ exports.deleteSubject = catchasynerror( async (req, res, next) => {
     
   })
 })
-
-
-
 //update a Subject----only admin update the Subject
+exports.updateSubjec = catchasynerror( async (req, res, next) => {
+  let dSubject = await Subject.findByIdAndUpdate(req.params.id );
+
+  if(!dSubject){
+      return next("Question not found",404);
+  }
+
+
+  res.status(200).json({
+      success:true,
+      message:"Subject update successfull",
+      dSubject
+    
+  })
+})
 
 exports.updateSubject = catchasynerror(async (req, res, next) => {
-  let upSubject = await Subject.findById(req.params.id);
+  let uSubject = await Subject.findById(req.params.id);
 
-  if(!upSubject){
-      return next(new ErrorHandler("Subject not found",404));
+  if(!uSubject){
+      return next(new ErrorHandler("product not found",404));
   }
-  upSubject = await Subject.findByIdAndUpdate(req.params.id, req.body , {
+  uSubject = await Subject.findByIdAndUpdate(req.params.id, req.body , {
       new:true,
       runValidators:true,
       useFindAndModify:false
   });
   res.status(200).json({
       success:true,
-      upSubject 
+      uSubject
   })
 });
+
+// exports.updatsubject = async (req, res, next) => {
+//   Subject.findByIdAndUpdate(req.body.id, 
+//     {Subject:req.body.Subject}, function(err, data) {
+//         if(err){
+//             console.log(err);
+//         }
+//         else{
+//             res.send(data);
+//             console.log("Data updated!");
+//         }
+//     });  
+  
+
+// }
+
+// router.post('/update', function(req, res) {
+//   Subject.findByIdAndUpdate(req.body.id, 
+//   {name:req.body.name}, function(err, data) {
+//       if(err){
+//           console.log(err);
+//       }
+//       else{
+//           res.send(data);
+//           console.log("Data updated!");
+//       }
+//   });  
+// });
 
 
 //
