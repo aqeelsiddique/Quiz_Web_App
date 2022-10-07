@@ -87,7 +87,7 @@ exports.updateSubject = catchasynerror(async (req, res, next) => {
   let uSubject = await Subject.findById(req.params.id);
 
   if(!uSubject){
-      return next(new ErrorHandler("product not found",404));
+      return next(new ErrorHandler("Subject not found",404));
   }
   uSubject = await Subject.findByIdAndUpdate(req.params.id, req.body , {
       new:true,

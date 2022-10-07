@@ -51,12 +51,7 @@ router.get('/machine/create', machine_controller.machine_create_get);
 router.post('/machine/create', machine_controller.machine_create_post);
 
 ////////update a  code post a different subject by @ Aqeel
-
-
-
-
 //////////////////////////////A
-
 // GET request to delete a Machine.
 router.get('/machine/:id/delete', machine_controller.machine_delete_get);
 
