@@ -14,6 +14,7 @@ const category = require('../models/category');
 
 ///////////////update code of create a category  @Aqeel
 exports.create_catory = async (req, res, next) => {
+  
   // Validate that the name field is not empty.
   body('name', 'Category name required').isLength({ min: 1 }).trim(),
 
