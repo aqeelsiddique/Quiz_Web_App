@@ -1,5 +1,7 @@
 const { body, validationResult } = require('express-validator');
 
+// import Resul from '../models/Resultmodel.js'
+
 const Category = require('../models/category');
 
 const Process = require('../models/process');
