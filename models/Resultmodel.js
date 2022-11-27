@@ -25,5 +25,9 @@ const resultmodel = new Schema({
     }
     
 })
+module.exports = {
+    resultmodel
+
+}
 // export default mongoose.model("result", resultmodel)
-export const result = monoose.model("Result", resultmodel)
+// export const result = monoose.model("Result", resultmodel)

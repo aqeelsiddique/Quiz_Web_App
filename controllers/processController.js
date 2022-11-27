@@ -171,7 +171,6 @@ exports.process_create_get = function (req, res, next) {
     }
   );
 };
-
 // Handle process create on POST.
 exports.process_create_post = [
   // Convert the category to an array.
@@ -189,6 +188,10 @@ exports.process_create_post = [
   body('question', 'question must not be empty.').isLength({ min: 1 }).trim(),
   body('option1', 'option1 must not be empty.').isLength({ min: 1 }).trim(),
   body('option2', 'option2 must not be empty.').isLength({ min: 1 }).trim(),
+
+  
+  
+
   // body('serial_number', 'Serial Number must not be empty')
     // .isLength({ min: 1 })
     // .trim(),
