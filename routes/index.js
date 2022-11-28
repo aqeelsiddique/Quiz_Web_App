@@ -6,23 +6,23 @@ const router = express.Router();
 /* GET home page. */
 
 
-router.route('/question').post(createQuestion).get(getQuestion).delete(delQuestion)
+router.route('/question').post(insertQuestion).get(getQuestion).delete(delQuestion)
 // create one quiz question
-router.post('/questions', async (req, res) => {
-  try {
-      const { description } = req.body
-      const { alternatives } = req.body
+// router.post('/questions', async (req, res) => {
+//   try {
+//       const { description } = req.body
+//       const { alternatives } = req.body
 
-      const question = await Question.create({
-          description,
-          alternatives
-      })
+//       const question = await Question.create({
+//           description,
+//           alternatives
+//       })
 
-      return res.status(201).json(question)
-  } catch (error) {
-      return res.status(500).json({"error":error})
-  }
-})
+//       return res.status(201).json(question)
+//   } catch (error) {
+//       return res.status(500).json({"error":error})
+//   }
+// })
 
 router.get('/view', (req, res) => {
   res.json("show a page")

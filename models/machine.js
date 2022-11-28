@@ -8,12 +8,10 @@ const MachineSchema = new Schema({
   description: { type: String, required: true },
   date_of_retirement: { type: Date }
 });
-
 // Virtual for machine's URL
 MachineSchema.virtual('url').get(function () {
   return '/dashboard/machine/' + this._id;
 });
-
 MachineSchema.virtual('lifespan').get(function () {
   let lifetime_string = '';
   if (this.date_of_commissioning) {

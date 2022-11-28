@@ -5,8 +5,8 @@
     <label for="name">Name: </label>
     <input class="form-control" id="name" type="text" placeholder="Name of process" name="name" required="true" value="{{process.name}}">
   </div> --}}
-  <div class="form-group">
-    <label for="machine">Quiz: </label>
+  {{!-- <div class="form-group">
+    <label for="machine">Quiz:</label>
     <select class="form-control" id="machine" name="machine" placeholder="Select machine" required="true">
       {{#if process}}
         {{#each machines}}
@@ -18,24 +18,25 @@
         {{/each}}
       {{/if}}
     </select>
-  </div>
+  </div> --}}
   <div class="form-group">
     <label for="question">Question : </label>
-    <input class="form-control" id="question" placeholder='question' name='question' required="true" rows="5">{{process.question}}</input>
+    <input class="form-control" id="question" placeholder='question' name='question' required="true" rows="5">{{question.question}}</input>
   </div>
   <div class="form-group">
     <label for="option1">Option 1 : </label>
-    <input class="form-control" id="option1" placeholder='option1' name='option1' required="true" rows="5">{{process.option1}}</input>
+    <input class="form-control" id="option1" placeholder='option1' name='option1' required="true" rows="5">{{question.option1}}</input>
   </div>
   <div class="form-group">
     <label for="option2">Option 2 : </label>
-    <input class="form-control" id="option2" placeholder='option2' name='option2' required="true" rows="5">{{process.option2}}</input>
+    <input class="form-control" id="option2" placeholder='option2' name='option2' required="true" rows="5">{{question.option2}}</input>
   </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
   {{!-- <div class="form-group">
     <label for="serial_number">Serial Number: </label>
     <input class="form-control" id="serial_number" name="serial_number" type="text" placeholder="Serial Number" value="{{process.serial_number}}" required="true">
   </div> --}}
-  <div class="form-group">
+  {{!-- <div class="form-group">
     <label>Category: </label>
     <div>
       {{#each categories}}
@@ -48,8 +49,9 @@
       {{/each}}
     </div>
   </div>
-  <button class="btn btn-primary" type="submit">Submit</button>
+  
 </form>
+
 
 {{#if errors}}
 <label>Errors:</label>
@@ -57,5 +59,5 @@
     {{#each errors}}
     <li>{{this.msg}}</li>
     {{/each}}
-  </ul>
-{{/if}}
+  </ul> --}}
+{{!-- {{/if}} --}}

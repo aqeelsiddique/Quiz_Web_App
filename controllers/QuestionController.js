@@ -2,11 +2,6 @@
 // import result from '../models/Resultmodel';
 const Resul = require('../models/Resultmodel')
 const Question = require("../models/question")
-
-
-
-
-
 exports.getQuestion = async function(req, res) {
     try {
         const q = await Question.find()
@@ -16,8 +11,7 @@ exports.getQuestion = async function(req, res) {
     catch(error) {
 
     }
-    // res.json("api get question")
-
+     // res.json("api get question"
 }
 // export async function getQuestion(req, res) {
 //     res.json("api get question")
@@ -28,6 +22,7 @@ exports.insertQuestion = async function(req, res) {
         const { alternatives } = req.body
 
         const question = await Question.create({
+
             description,
             alternatives
         })

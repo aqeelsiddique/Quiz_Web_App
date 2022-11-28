@@ -42,7 +42,6 @@ exports.processinstance_detail = function (req, res, next) {
       });
     });
 };
-
 // Display ProcessInstance create form on GET.
 exports.processinstance_create_get = function (req, res, next) {
   Process.find({}, 'name').exec(function (err, processes) {
@@ -56,7 +55,6 @@ exports.processinstance_create_get = function (req, res, next) {
     });
   });
 };
-
 // Handle ProcessInstance create on POST.
 exports.processinstance_create_post = [
   // Validate fields.
@@ -79,6 +77,7 @@ exports.processinstance_create_post = [
 
     // Create a ProcessInstance object with escaped and trimmed data.
     const processinstance = new ProcessInstance({
+      
       process: req.body.process,
       operator: req.body.operator,
       status: req.body.status,
@@ -107,7 +106,7 @@ exports.processinstance_create_post = [
         if (err) {
           return next(err);
         }
-        // Successful - redirect to new record.
+        //Successful - redirect to new record.
         res.redirect(processinstance.url);
       });
     }

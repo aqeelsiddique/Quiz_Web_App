@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Require controller modules.
+const question = require("../controllers/QuestionController")
 const process_controller = require('../controllers/processController');
 const machine_controller = require('../controllers/machineController');
 const category_controller = require('../controllers/categoryController');
@@ -21,6 +22,8 @@ router.get('/process/create', process_controller.process_create_get);
 
 // POST request for creating a Process.
 router.post('/process/create', process_controller.process_create_post);
+router.post("/process/add",question.QuestionController)
+
 
 // GET request to delete a Process.
 router.get('/process/:id/delete', process_controller.process_delete_get);
