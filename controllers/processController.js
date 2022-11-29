@@ -1,14 +1,12 @@
 const { body, validationResult } = require('express-validator');
-const Question = require("../models/question")
 
 const Process = require('../models/process');
 const Machine = require('../models/machine');
 const Category = require('../models/category');
 const ProcessInstance = require('../models/processinstance');
 
-
 const async = require('async');
-const question = require('../models/question');
+
 exports.index = function (req, res) {
   async.parallel(
     {
@@ -114,7 +112,6 @@ exports.process_list = function (req, res, next) {
       });
     });
 };
-
 // Display detail page for a specific process.
 exports.process_detail = function (req, res, next) {
   async.parallel(
@@ -148,7 +145,6 @@ exports.process_detail = function (req, res, next) {
     }
   );
 };
-
 // Display process create form on GET.
 exports.process_create_get = function (req, res, next) {
   // Get all machines and categories, which we can use for adding to our process.
@@ -176,31 +172,30 @@ exports.process_create_get = function (req, res, next) {
 // Handle process create on POST.
 exports.process_create_post = [
   // Convert the category to an array.
-  // (req, res, next) => {
-  //   if (!(req.body.category instanceof Array)) {
-  //     if (typeof req.body.category === 'undefined') req.body.category = [];
-  //     else req.body.category = new Array(req.body.category);
-  //   }
-  //   next();
-  // },
+  (req, res, next) => {
+    if (!(req.body.category instanceof Array)) {
+      if (typeof req.body.category === 'undefined') req.body.category = [];
+      else req.body.category = new Array(req.body.category);
+    }
+    next();
+  },
 
   // Validate fields.
   // body('name', 'Name must not be empty.').isLength({ min: 1 }).trim(),
-  body('machine','Machine must not be empty.').isLength({ min: 1 }).trim(),
-  body('question','question must not be empty.').isLength({ min: 1 }).trim(),
-  body('option1','option1 must not be empty.').isLength({ min: 1 }).trim(),
-  body('option2','option2 must not be empty.').isLength({ min: 1 }).trim(),
+  body('machine', 'Machine must not be empty.').isLength({ min: 1 }).trim(),
+  body('question', 'question must not be empty.').isLength({ min: 1 }).trim(),
+  body('option1', 'option1 must not be empty.').isLength({ min: 1 }).trim(),
+  body('option2', 'option2 must not be empty.').isLength({ min: 1 }).trim(),
   // body('serial_number', 'Serial Number must not be empty')
     // .isLength({ min: 1 })
     // .trim(),
-
   // Sanitize fields (using wildcard).
-  // body('*').escape(),
-  // body('category.*').escape(),
+  body('*').escape(),
+  body('category.*').escape(),
   // Process request after validation and sanitization.
   (req, res, next) => {
     // Extract the validation errors from a request.
-    // const errors = validationResult(req);
+    const errors = validationResult(req);
     // Create a Process object with escaped and trimmed data.
     const process = new Process({
       // name: req.body.name,
@@ -209,74 +204,55 @@ exports.process_create_post = [
       option1: req.body.option1,
       option2: req.body.option2,
       // serial_number: req.body.serial_number,
-      // category: req.body.category,
+      category: req.body.category,
     });
 
-    // if (!errors.isEmpty()) {
-    //   // There are errors. Render form again with sanitized values/error messages.
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/error messages.
 
-    //   // Get all machines and categories for form.
-    //   async.parallel(
-    //     {
-    //       machines: function (callback) {
-    //         Machine.find(callback);
-    //       },
-    //       categories: function (callback) {
-    //         Category.find(callback);
-    //       },
-    //     },
-    //     function (err, results) {
-    //       if (err) {
-    //         return next(err);
-    //       }
+      // Get all machines and categories for form.
+      async.parallel(
+        {
+          machines: function (callback) {
+            Machine.find(callback);
+          },
+          categories: function (callback) {
+            Category.find(callback);
+          },
+        },
+        function (err, results) {
+          if (err) {
+            return next(err);
+          }
 
-    //       // Mark our selected categories as checked.
-    //       for (let i = 0; i < results.categories.length; i++) {
-    //         if (process.category.indexOf(results.categories[i]._id) > -1) {
-    //           results.categories[i].checked = 'checked';
-    //         }
-    //       }
-    //       res.render('process_form', {
-    //         title: 'Create Process',
-    //         machines: results.machines,
-    //         categories: results.categories,
-    //         process: process,
-    //         errors: errors.array(),
-    //       });
-    //     }
-    //   );
-    //   return;
-    // } else {
-    //   // Data from form is valid. Save process.
-    //   process.save(function (err) {
-    //     if (err) {
-    //       return next(err);
-    //     }
-    //     //successful - redirect to new process record.
-    //     res.redirect(process.url);
-    //   });
-    // }
+          // Mark our selected categories as checked.
+          for (let i = 0; i < results.categories.length; i++) {
+            if (process.category.indexOf(results.categories[i]._id) > -1) {
+              results.categories[i].checked = 'checked';
+            }
+          }
+          res.render('process_form', {
+            title: 'Create Process',
+            machines: results.machines,
+            categories: results.categories,
+            process: process,
+            errors: errors.array(),
+          });
+        }
+      );
+      return;
+    } else {
+      // Data from form is valid. Save process.
+      process.save(function (err) {
+        if (err) {
+          return next(err);
+        }
+        //successful - redirect to new process record.
+        res.redirect(process.url);
+      });
+    }
   },
 ];
-
-
-exports.insertQuestion = async function(req, res) {
-  try {
-      const { description } = req.body
-      const { alternatives } = req.body
-
-      const question = await Question.create({
-
-          description,
-          alternatives
-      })
-
-      return res.status(201).json(question)
-  } catch (error) {
-      return res.status(500).json({"error":error})
-  }
-
-}
 
 // Display process delete form on GET.
 exports.process_delete_get = function (req, res, next) {

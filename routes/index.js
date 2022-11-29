@@ -7,6 +7,10 @@ const router = express.Router();
 
 
 router.route('/question').post(insertQuestion).get(getQuestion).delete(delQuestion)
+
+
+
+
 // create one quiz question
 // router.post('/questions', async (req, res) => {
 //   try {

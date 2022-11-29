@@ -6,14 +6,10 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const compression = require("compression");
 const helmet = require("helmet");
-
 const indexRouter = require("./routes/index");
 const dashboardRouter = require("./routes/dashboard");
-
 // const roleRouter = require("./views/organization/role_detail")
-
 const app = express();
-
 //Setup Handlebars instance helpers
 const hbs = exphbs.create({
   defaultLayout: "main",
@@ -42,17 +38,14 @@ const hbs = exphbs.create({
     allowProtoPropertiesByDefault: true,
   },
 });
-
 app.engine("handlebars", hbs.engine); //Handlebars engine with custom helpers
 app.set("view engine", "handlebars");
-
 app.use(helmet());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
-
 // Static files to serve
 app.use(
   "/jquery",
@@ -70,25 +63,19 @@ app.use(
   "/feather-icons",
   express.static(path.join(__dirname, "/node_modules/feather-icons/dist"))
 );
-
 // const organization_path = path.join(__dirname,"/views/organization")
-
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.static(path.join(__dirname, '/public/image')));
 app.use(express.static(path.join(__dirname, '/views/organization')));
 // app.use("views",organization_path);
-
 // Endpoints
 app.use("/", indexRouter);
 app.use("/dashboard", dashboardRouter);
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
 });
-
-// app.use("role_detail",roleRouter);
-
+// app.use("role_detail",roleRouter)
 // error handler
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
@@ -99,5 +86,4 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render("error");
 });
-
 module.exports = app;
