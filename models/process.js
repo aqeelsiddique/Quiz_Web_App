@@ -6,6 +6,7 @@ const ProcessSchema = new Schema({
   // name: { type: String, required: true },
   // machine: { type: Schema.Types.ObjectId, ref: 'Machine', required: true },
   question: { type: String, required: true },
+
   option1: { type: String, required: true },
   option2: { type: String, required: true },
   // serial_number: { type: String, required: true },
