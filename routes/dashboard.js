@@ -22,7 +22,7 @@ router.get('/process/create', process_controller.process_create_get);
 
 // POST request for creating a Process.
 router.post('/process/create', process_controller.process_create_post);
-router.post("/process/add",question.QuestionController)
+// router.post("/process/add",question.QuestionController)
 
 
 // GET request to delete a Process.

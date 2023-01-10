@@ -140,7 +140,6 @@ exports.category_delete_get = function (req, res, next) {
     }
   );
 };
-
 // Handle Category delete on POST.
 exports.category_delete_post = function (req, res, next) {
   async.parallel(
@@ -178,7 +177,6 @@ exports.category_delete_post = function (req, res, next) {
     }
   );
 };
-
 // Display Category update form on GET.
 exports.category_update_get = function (req, res, next) {
   Category.findById(req.params.id, function (err, category) {
@@ -198,26 +196,21 @@ exports.category_update_get = function (req, res, next) {
     });
   });
 };
-
 // Handle Category update on POST.
 exports.category_update_post = [
   // Validate that the name field is not empty.
   body('name', 'Category name required').isLength({ min: 1 }).trim(),
-
   // Sanitize (trim and escape) the name field.
   body('name').trim().escape(),
-
   // Process request after validation and sanitization.
   (req, res, next) => {
     // Extract the validation errors from a request .
     const errors = validationResult(req);
-
     // Create a category object with escaped and trimmed data (and the old id!)
     const category = new Category({
       name: req.body.name,
       _id: req.params.id,
     });
-
     if (!errors.isEmpty()) {
       // There are errors. Render the form again with sanitized values and error messages.
       res.render('category_form', {
